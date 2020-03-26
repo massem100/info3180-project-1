@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block main %}
+    <h2>Add Profile</h2>
+
+    <form action method='POST' enctype="multipart/form-data">
+        {{ form.csrf_token}}
+        <div>
+            {{ form.first_name.label('First Name')}}
+            {{ form.first_name(class="rounded_input" )}}
+        </div>
+        
+        <div>
+            {{ form.last_name.label('Last Name')}} 
+            {{form.last_name(class = "rounded_input")}}
+        </div>
+        
+        <div>
+            {{ form.gender.label('Gender')}} 
+            {{ form.gender(class = "rounded_input", )}}
+        </div>
+        
+        <div>
+            {{ form.email.label('Email')}} 
+            {{ form.email(class = "rounded_input", placeholder = 'eg. jdoe@example.com')}}
+        </div>
+        
+        <div>
+            {{ form.location.label('Location')}} 
+            {{ form.location(class = "rounded_input", placeholder = 'eg. Kingston, Jamaica')}}
+        </div>
+        
+    
+        <div>
+            {{ form.bio.label('Biography')}} 
+            {{form.bio(class = "rounded_input", id = 'bio')}}
+        </div>
+        <div>
+            {{ form.photo.label('Profile Picture')}}
+            {{form.photo(class = "rounded_input", id = 'photo')}}
+        </div>
+
+        <button id='submitButton' type="submit">Send</button>
+    </form>
+{% endblock  %}
