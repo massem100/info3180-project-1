@@ -1,6 +1,8 @@
 from . import db
-from werkzeug.security import generate_password_hash
+from werkzeug.security import                                                                generate_password_hash
 from flask_login._compat import unicode
+from datetime import date 
+
 
 
 class UserProfile(db.Model):
@@ -31,6 +33,7 @@ class UserProfile(db.Model):
         self.location = location
         self.photo = photo
         self.bio = bio 
+        self.date_created = date.today()
         
         # self.password = generate_password_hash(
         #     password, method='pbkdf2:sha256')

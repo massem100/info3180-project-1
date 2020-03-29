@@ -2,5 +2,15 @@
 
 
 {% block main %}
-<h1>TEST PROFILES......... HTML </h1>
+<h1> Profiles</h1>
+
+<div id="container">
+    {% for f in lst %}
+    <div class="grid">
+
+        <img src="{{url_for ('static', filename = 'uploads/' + f)}}">
+    </div>
+    {% endfor %}
+</div>
+
 {% endblock %}

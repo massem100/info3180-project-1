@@ -11,7 +11,7 @@ from werkzeug.utils import secure_filename
 class ProfileForm(FlaskForm):
     first_name = StringField('fname', validators=[InputRequired(), Length(max=30)])
     last_name = StringField('lname', validators=[InputRequired(), Length(max=30)])
-    gender = SelectField('gender', choices=[ ('2', 'Male'), ('1', 'Female')], validators=[InputRequired()])
+    gender = SelectField('gender', choices=[ ('Male', 'Male'), ('Female', 'Female')], validators=[InputRequired()])
     email = EmailField('email', validators=[Email(), InputRequired(), Length(max=50)])
     location = StringField('location', validators=[InputRequired(), Length(max=50)])
     bio = TextAreaField('bio', validators=[DataRequired(), Length(max=150)])
