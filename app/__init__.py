@@ -8,7 +8,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://project1:projectPASS@local
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True # added just to suppress a warning
 
 db = SQLAlchemy(app)
-
+UPLOAD_FOLDER = './app/static/uploads'
 # Flask_Login login manager
 login_manager = LoginManager()
 login_manager.init_app(app)

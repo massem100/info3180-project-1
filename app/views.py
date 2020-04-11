@@ -33,22 +33,15 @@ def about():
 
 @app.route('/profiles', methods= ['POST','GET'])
 def profiles(): 
-    form = ProfileForm()
+    # form = ProfileForm()
     # if request.method == "POST" and form.validate():
     #     if form.validate_on_submit():
+    # cur = db.cursor()
+    profiles = UserProfile.query.all()
+    return render_template('profiles.html', profiles=profiles)
 
-    return render_template('profiles.html', form = form)
 
-# def get_profile_images():
-#     lst = []
-#     rootdir = os.getcwd()
-#     # print rootdir
-#     for subdir, dirs, files in os.walk(rootdir + '/app/static/uploads'):
-#         for file in files:
-#             lst.append(file)
-#     return lst
 
-#     return render_template('profiles.html')
 
 
 @app.route('/profile', methods = ['POST','GET'])
@@ -64,15 +57,29 @@ def addProfile():
             bio = profileform.bio.data
             photo = profileform.photo.data
             
-            filename = secure_filename(photo.filename)
+            photo_filename = secure_filename(photo.filename)
+            photo.save(os.path.join(app.config['UPLOAD_FOLDER'], photo_filename))
+            
+            profile = UserProfile(first_name,last_name,gender,location, email,bio, photo_filename)
+            db.session.add(profile)
+            db.session.commit()
             # photo.save(os.path.join(app.config))
-            return redirect(url_for('home'))
+            flash('User sucessfully added', 'success')
+            return redirect(url_for('profiles'))
     else: 
         return render_template('addProfile.html', form = profileform)
 
     if request.method =="GET":
         return render_template('addProfile.html')
 
+def get_uploaded_images():
+    lst = []
+    rootdir = os.getcwd()
+    # print rootdir
+    for subdir, dirs, files in os.walk(rootdir + '/app/static/uploads'):
+        for file in files:
+            lst.append(file)
+    return lst
 
 @app.route('/profile/<userid>')
 def profile(userid): 
@@ -87,17 +94,16 @@ def load_user(id):
     return UserProfile.query.get(int(id))
 
 
-@app.route('/logout')
-@login_required
-def logout():
-    logout_user()
-    flash('You have been logged out.', 'success')
-    return redirect(url_for('home'))
-
-
 ###
 # The functions below should be applicable to all Flask apps.
 ###
+def flash_errors(form):
+    for field, errors in form.errors.items():
+        for error in errors:
+            flash(u"Error in the %s field - %s" % (
+                getattr(form, field).label.text,
+                error
+), 'danger')
 
 @app.route('/<file_name>.txt')
 def send_text_file(file_name):

@@ -20,7 +20,7 @@ class UserProfile(db.Model):
     location = db.Column(db.String(80))
     bio = db.Column(db.String(150))
     photo = db.Column(db.String(120))
-    date_created = db.Column(db.Date())
+    created_on = db.Column(db.Date())
 
 
 
@@ -33,7 +33,7 @@ class UserProfile(db.Model):
         self.location = location
         self.photo = photo
         self.bio = bio 
-        self.date_created = date.today()
+        self.created_on = date.today()
         
         # self.password = generate_password_hash(
         #     password, method='pbkdf2:sha256')
@@ -55,3 +55,5 @@ class UserProfile(db.Model):
 
     def __repr__(self):
         return '<User %r>' % (self.username)
+
+
