@@ -1,6 +1,53 @@
-{% extends "base.html" %}
-{% block main%}
+{% extends 'base.html' %}
+{% block main %}
 
-{% include 'flash_messages.html' %}
+<div class="shadow-lg bg-white col-md-6 btop rounded">
+    {% include 'flash_messages.html' %}
+
+    <div class=" d-flex flex-row w-100 ">
+        <div>
+
+            <img id="profile_photo" src="{{url_for ('static', filename = 'uploads/' + user.photo )}}">
+        </div>
+
+
+        <div class="d-flex flex-column p-2 ml-1 w-75 bd-highlight text-light-grey justify-content-center">
+            <h5 class="text-dark font-md bold ml-2 font-weight-bold"> {{user.first_name +' ' + user.last_name}}</h5>
+            <p>
+                <img id="icons" src="{{url_for('static', filename ='uploads/email.png')}}" />
+                <span class="bold ml-1 ">{{user.email}} </span>
+            </p>
+
+            <p>
+                <img id="icons" src="{{url_for('static', filename ='uploads/pin.png')}}" />
+                <span class="bold ml-1 "> {{user.location}} </span>
+            </p>
+            <p>
+                <img id="icons" src="{{url_for('static', filename ='uploads/calendar.png')}}" />
+                <span class="bold ml-1 "> {{created_on}} </span>
+            </p>
+        </div>
+    </div>
+
+
+    <div class=" p-2 ml-2">
+
+        <h5> About Me</h5>
+        <p>
+            {{user.bio}}
+        </p>
+
+    </div>
+
+
+    <div class=" d-flex flex-row p-1 w-75 ml-5 mb-5">
+        <a class="btn btn-green w-75 h-25 mt-2 mb-4 justify-content-center rounded text-white font-sml font-weight-bold"
+            href="">Send Message</a>
+
+        <a class="btn btn-primary w-75 h-25 mt-2 ml-3 mb-4 justify-content-center rounded text-white font-sml font-weight-bold"
+            href="">Follow</a>
+
+    </div>
+</div>
 
 {% endblock %}

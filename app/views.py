@@ -4,7 +4,8 @@ Jinja2 Documentation:    http://jinja.pocoo.org/2/documentation/
 Werkzeug Documentation:  http://werkzeug.pocoo.org/documentation/
 This file creates your application.
 """
-import os
+import os 
+import datetime
 from app import app, db, login_manager
 from flask import render_template, request, redirect, url_for, flash, session, abort
 from flask_login import login_user, logout_user, current_user, login_required
@@ -33,15 +34,8 @@ def about():
 
 @app.route('/profiles', methods= ['POST','GET'])
 def profiles(): 
-    # form = ProfileForm()
-    # if request.method == "POST" and form.validate():
-    #     if form.validate_on_submit():
-    # cur = db.cursor()
     profiles = UserProfile.query.all()
     return render_template('profiles.html', profiles=profiles)
-
-
-
 
 
 @app.route('/profile', methods = ['POST','GET'])
@@ -82,10 +76,15 @@ def get_uploaded_images():
     return lst
 
 @app.route('/profile/<userid>')
-def profile(userid): 
-    userid= "Mary"
-    return render_template('profile.html', userid = userid)
+def viewProfile(userid): 
+    user = UserProfile.query.get(userid)
+    created_on = format_date_joined(user.created_on)
+    return render_template('view_UserProfile.html', user=user, created_on = created_on)
 
+
+def format_date_joined(date_joined):
+    now = datetime.datetime.now()  # today's date
+    return ("Joined on " + date_joined.strftime("%B %d, %Y"))
 # user_loader callback. This callback is used to reload the user object from
 # the user ID stored in the session
 
