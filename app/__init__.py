@@ -17,4 +17,3 @@ login_manager.login_view = 'login'
 
 app.config.from_object(__name__)
 from app import views
-# postgresql: // project1: projectPASS@localhost/project1
