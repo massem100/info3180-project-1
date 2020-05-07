@@ -3,7 +3,7 @@ from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "RABBITSFLYBIRDS SING"
+app.config['SECRET_KEY'] = "db0442f6d58c75a595df2751b63061aa"
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://znhmyqggjhvgxu:c599c02ecfb0f74edb722319dd1be537c0b795ed5e8b9ba7a4c7d11e15c87a3e@ec2-52-87-58-157.compute-1.amazonaws.com:5432/d2fdqrtu7g88gk'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True # added just to suppress a warning
 
