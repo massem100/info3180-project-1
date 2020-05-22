@@ -1,5 +1,5 @@
 from . import db
-from werkzeug.security import                                                                generate_password_hash
+from werkzeug.security import  generate_password_hash
 from flask_login._compat import unicode
 from datetime import date 
 
@@ -54,6 +54,6 @@ class UserProfile(db.Model):
             return str(self.id)  # python 3 support
 
     def __repr__(self):
-        return '<User %r>' % (self.username)
+        return '<User %r>' % (self.id)
 
 

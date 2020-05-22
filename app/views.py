@@ -9,7 +9,7 @@ import datetime
 from app import app, db, login_manager
 from flask import render_template, request, redirect, url_for, flash, session, abort
 from flask_login import login_user, logout_user, current_user, login_required
-from app.form import ProfileForm
+from app.forms import ProfileForm
 from app.models import UserProfile
 from werkzeug.security import check_password_hash
 from werkzeug.utils import secure_filename
@@ -35,6 +35,7 @@ def about():
 @app.route('/profiles', methods= ['POST','GET'])
 def profiles(): 
     profiles = UserProfile.query.all()
+    print(profiles)
     return render_template('profiles.html', profiles=profiles)
 
 
@@ -52,7 +53,7 @@ def addProfile():
             photo = profileform.photo.data
             
             photo_filename = secure_filename(photo.filename)
-            photo.save(os.path.join(app.config['UPLOAD_FOLDER'], photo_filename))
+            photo.save(os.pah.join(app.config['UPLOAD_FOLDER'], photo_filename))
             
             profile = UserProfile(first_name,last_name,gender,location, email,bio, photo_filename)
             db.session.add(profile)
@@ -78,6 +79,7 @@ def get_uploaded_images():
 @app.route('/profile/<userid>')
 def viewProfile(userid): 
     user = UserProfile.query.get(userid)
+    print(user)
     created_on = format_date_joined(user.created_on)
     return render_template('view_UserProfile.html', user=user, created_on = created_on)
 
