@@ -4,7 +4,6 @@ from wtforms import StringField, PasswordField, SelectField, TextAreaField
 from wtforms.fields.html5 import EmailField
 from wtforms.validators import InputRequired, Length, Email, DataRequired
 from wtforms.widgets import Input
-
 from werkzeug.utils import secure_filename
 
 
@@ -15,4 +14,4 @@ class ProfileForm(FlaskForm):
     email = EmailField('email', validators=[Email(), InputRequired(), Length(max=50)])
     location = StringField('location', validators=[InputRequired(), Length(max=50)])
     bio = TextAreaField('bio', validators=[DataRequired(), Length(max=150)])
-    photo= FileField('photo', validators=[FileRequired(), FileAllowed(['jpg','jpeg','png'], 'Images only!')])
+    photo= FileField('photo', validators=[FileRequired(), FileAllowed(['jpg','png'], 'Images only!')])

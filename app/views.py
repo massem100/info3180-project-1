@@ -53,7 +53,7 @@ def addProfile():
             photo = profileform.photo.data
             
             photo_filename = secure_filename(photo.filename)
-            photo.save(os.pah.join(app.config['UPLOAD_FOLDER'], photo_filename))
+            photo.save(os.path.join(app.config['UPLOAD_FOLDER'], photo_filename))
             
             profile = UserProfile(first_name,last_name,gender,location, email,bio, photo_filename)
             db.session.add(profile)
